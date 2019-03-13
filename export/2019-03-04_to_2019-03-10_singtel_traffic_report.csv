@@ -1,0 +1,274 @@
+"Generate Date:11/03/2019"
+"Daily 24 Hour Measurement of PBX Traffic Report"
+"Tel No	:",69586888,,,"Name	: SMRT Taxis Pte Ltd"
+"Date 		: ",04/03/2019,,,,"Lines	: 90"
+,"Incoming Calls",,,,"Outgoing Calls",,,,"Total Calls"
+Hour,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration
+1,,5,5,133,,0,0,0,,5,5,133
+2,,4,4,187,,0,0,0,,4,4,187
+3,,2,2,70,,0,0,0,,2,2,70
+4,,0,0,0,,0,0,0,,0,0,0
+5,,5,5,192,,0,0,0,,5,5,192
+6,,13,13,194,,0,0,0,,13,13,194
+7,,93,93,182,,0,0,0,,93,93,182
+8,,89,89,146,,0,0,0,,89,89,146
+9,*,177,177,128,+,0,0,0,#,177,177,128
+10,,57,57,151,,0,0,0,,57,57,151
+11,,32,32,171,,0,0,0,,32,32,171
+12,,27,27,194,,0,0,0,,27,27,194
+13,,23,23,137,,0,0,0,,23,23,137
+14,,42,42,123,,0,0,0,,42,42,123
+15,,37,37,159,,0,0,0,,37,37,159
+16,,23,23,172,,0,0,0,,23,23,172
+17,,35,35,134,,0,0,0,,35,35,134
+18,,28,28,183,,0,0,0,,28,28,183
+19,,46,46,198,,0,0,0,,46,46,198
+20,,18,18,163,,0,0,0,,18,18,163
+21,,19,19,197,,0,0,0,,19,19,197
+22,,19,19,214,,0,0,0,,19,19,214
+23,,13,13,212,,0,0,0,,13,13,212
+24,,8,8,157,,0,0,0,,8,8,157
+Total,,=sum(C7:C30),=sum(D7:D30),"=Round(SUMPRODUCT(D7:D30,E7:E30)/D31)",,=sum(G7:G30),=sum(H7:H30),=sum(I7:I30),,=sum(K7:K30),=sum(L7:L30),"=Round(SUMPRODUCT(L7:L30,M7:M30)/L31)"
+,,
+Abbreviations:,,,,
+"Date           ",":The date of measurement.",,,,Hour," :The end hour of measurement."
+"Incoming Calls ",":Calls terminated  at subscriber.",,,,"Attempt ",": Number of call attempts made."
+"Outgoing Calls ",":Calls originated from subscriber.",,,,"Answer ",": Number of answered calls."
+"BHInd.   *     ",":Busy hr (Incoming Calls)",,,,"Duration ",":The average conversation time in secs calculated using Traffic"
+"+ : BHInd(Outgoing Calls)"
+"+ : BHInd(Total Calls)"
+"Generate Date:11/03/2019"
+"Daily 24 Hour Measurement of PBX Traffic Report"
+"Tel No	:",69586888,,,"Name	: SMRT Taxis Pte Ltd"
+"Date 		: ",05/03/2019,,,,"Lines	: 90"
+,"Incoming Calls",,,,"Outgoing Calls",,,,"Total Calls"
+Hour,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration
+1,,6,6,145,,0,0,0,,6,6,145
+2,,11,11,128,,0,0,0,,11,11,128
+3,,4,4,170,,0,0,0,,4,4,170
+4,,3,3,250,,0,0,0,,3,3,250
+5,,1,1,159,,0,0,0,,1,1,159
+6,,25,25,141,,0,0,0,,25,25,141
+7,,31,31,138,,0,0,0,,31,31,138
+8,,18,18,113,,0,0,0,,18,18,113
+9,*,60,60,129,+,0,0,0,#,60,60,129
+10,,26,26,184,,0,0,0,,26,26,184
+11,,33,33,168,,0,0,0,,33,33,168
+12,,31,31,198,,0,0,0,,31,31,198
+13,,22,22,173,,0,0,0,,22,22,173
+14,,20,20,168,,0,0,0,,20,20,168
+15,,20,20,217,,0,0,0,,20,20,217
+16,,22,22,141,,0,0,0,,22,22,141
+17,,32,32,164,,0,0,0,,32,32,164
+18,,33,33,161,,0,0,0,,33,33,161
+19,,33,33,136,,0,0,0,,33,33,136
+20,,15,15,92,,0,0,0,,15,15,92
+21,,21,21,313,,0,0,0,,21,21,313
+22,,23,23,178,,0,0,0,,23,23,178
+23,,19,19,175,,0,0,0,,19,19,175
+24,,11,11,143,,0,0,0,,11,11,143
+Total,,=sum(C46:C69),=sum(D46:D69),"=Round(SUMPRODUCT(D46:D69,E46:E69)/D70)",,=sum(G46:G69),=sum(H46:H69),=sum(I46:I69),,=sum(K46:K69),=sum(L46:L69),"=Round(SUMPRODUCT(L46:L69,M46:M69)/L70)"
+,,
+Abbreviations:,,,,
+"Date           ",":The date of measurement.",,,,Hour," :The end hour of measurement."
+"Incoming Calls ",":Calls terminated  at subscriber.",,,,"Attempt ",": Number of call attempts made."
+"Outgoing Calls ",":Calls originated from subscriber.",,,,"Answer ",": Number of answered calls."
+"BHInd.   *     ",":Busy hr (Incoming Calls)",,,,"Duration ",":The average conversation time in secs calculated using Traffic"
+"+ : BHInd(Outgoing Calls)"
+"+ : BHInd(Total Calls)"
+"Generate Date:11/03/2019"
+"Daily 24 Hour Measurement of PBX Traffic Report"
+"Tel No	:",69586888,,,"Name	: SMRT Taxis Pte Ltd"
+"Date 		: ",06/03/2019,,,,"Lines	: 90"
+,"Incoming Calls",,,,"Outgoing Calls",,,,"Total Calls"
+Hour,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration
+1,,7,7,96,,0,0,0,,7,7,96
+2,,5,5,97,,0,0,0,,5,5,97
+3,,6,6,234,,0,0,0,,6,6,234
+4,,1,1,163,,0,0,0,,1,1,163
+5,,4,4,330,,0,0,0,,4,4,330
+6,,14,14,198,,0,0,0,,14,14,198
+7,,25,25,158,,0,0,0,,25,25,158
+8,,31,31,162,,0,0,0,,31,31,162
+9,*,68,68,162,+,0,0,0,#,68,68,162
+10,,33,33,103,,0,0,0,,33,33,103
+11,,30,30,159,,0,0,0,,30,30,159
+12,,29,29,154,,0,0,0,,29,29,154
+13,,35,35,204,,0,0,0,,35,35,204
+14,,26,26,116,,0,0,0,,26,26,116
+15,,24,24,152,,0,0,0,,24,24,152
+16,,18,18,130,,0,0,0,,18,18,130
+17,,29,29,123,,0,0,0,,29,29,123
+18,,23,23,148,,0,0,0,,23,23,148
+19,,20,20,144,,0,0,0,,20,20,144
+20,,13,13,139,,0,0,0,,13,13,139
+21,,15,15,182,,0,0,0,,15,15,182
+22,,20,20,182,,0,0,0,,20,20,182
+23,,20,20,125,,0,0,0,,20,20,125
+24,,8,8,188,,0,0,0,,8,8,188
+Total,,=sum(C85:C108),=sum(D85:D108),"=Round(SUMPRODUCT(D85:D108,E85:E108)/D109)",,=sum(G85:G108),=sum(H85:H108),=sum(I85:I108),,=sum(K85:K108),=sum(L85:L108),"=Round(SUMPRODUCT(L85:L108,M85:M108)/L109)"
+,,
+Abbreviations:,,,,
+"Date           ",":The date of measurement.",,,,Hour," :The end hour of measurement."
+"Incoming Calls ",":Calls terminated  at subscriber.",,,,"Attempt ",": Number of call attempts made."
+"Outgoing Calls ",":Calls originated from subscriber.",,,,"Answer ",": Number of answered calls."
+"BHInd.   *     ",":Busy hr (Incoming Calls)",,,,"Duration ",":The average conversation time in secs calculated using Traffic"
+"+ : BHInd(Outgoing Calls)"
+"+ : BHInd(Total Calls)"
+"Generate Date:11/03/2019"
+"Daily 24 Hour Measurement of PBX Traffic Report"
+"Tel No	:",69586888,,,"Name	: SMRT Taxis Pte Ltd"
+"Date 		: ",07/03/2019,,,,"Lines	: 90"
+,"Incoming Calls",,,,"Outgoing Calls",,,,"Total Calls"
+Hour,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration
+1,,9,9,99,,0,0,0,,9,9,99
+2,,2,2,154,,0,0,0,,2,2,154
+3,,6,6,173,,0,0,0,,6,6,173
+4,,0,0,0,,0,0,0,,0,0,0
+5,,6,6,70,,0,0,0,,6,6,70
+6,,14,14,130,,0,0,0,,14,14,130
+7,,16,16,203,,0,0,0,,16,16,203
+8,,16,16,110,,0,0,0,,16,16,110
+9,,56,56,143,,0,0,0,,56,56,143
+10,,42,42,163,,0,0,0,,42,42,163
+11,*,68,68,157,+,0,0,0,#,68,68,157
+12,,38,38,166,,0,0,0,,38,38,166
+13,,27,27,175,,0,0,0,,27,27,175
+14,,20,20,211,,0,0,0,,20,20,211
+15,,13,13,140,,0,0,0,,13,13,140
+16,,35,35,131,,0,0,0,,35,35,131
+17,,56,56,149,,0,0,0,,56,56,149
+18,,59,59,135,,0,0,0,,59,59,135
+19,,39,39,154,,0,0,0,,39,39,154
+20,,31,31,179,,0,0,0,,31,31,179
+21,,23,23,164,,0,0,0,,23,23,164
+22,,27,27,157,,0,0,0,,27,27,157
+23,,57,57,134,,0,0,0,,57,57,134
+24,,19,19,113,,0,0,0,,19,19,113
+Total,,=sum(C124:C147),=sum(D124:D147),"=Round(SUMPRODUCT(D124:D147,E124:E147)/D148)",,=sum(G124:G147),=sum(H124:H147),=sum(I124:I147),,=sum(K124:K147),=sum(L124:L147),"=Round(SUMPRODUCT(L124:L147,M124:M147)/L148)"
+,,
+Abbreviations:,,,,
+"Date           ",":The date of measurement.",,,,Hour," :The end hour of measurement."
+"Incoming Calls ",":Calls terminated  at subscriber.",,,,"Attempt ",": Number of call attempts made."
+"Outgoing Calls ",":Calls originated from subscriber.",,,,"Answer ",": Number of answered calls."
+"BHInd.   *     ",":Busy hr (Incoming Calls)",,,,"Duration ",":The average conversation time in secs calculated using Traffic"
+"+ : BHInd(Outgoing Calls)"
+"+ : BHInd(Total Calls)"
+"Generate Date:11/03/2019"
+"Daily 24 Hour Measurement of PBX Traffic Report"
+"Tel No	:",69586888,,,"Name	: SMRT Taxis Pte Ltd"
+"Date 		: ",08/03/2019,,,,"Lines	: 90"
+,"Incoming Calls",,,,"Outgoing Calls",,,,"Total Calls"
+Hour,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration
+1,,7,7,97,,0,0,0,,7,7,97
+2,,3,3,36,,0,0,0,,3,3,36
+3,,1,1,334,,0,0,0,,1,1,334
+4,,4,4,217,,0,0,0,,4,4,217
+5,,5,5,156,,0,0,0,,5,5,156
+6,,13,13,181,,0,0,0,,13,13,181
+7,,24,24,138,,0,0,0,,24,24,138
+8,,24,24,186,,0,0,0,,24,24,186
+9,,60,60,142,,0,0,0,,60,60,142
+10,,52,52,187,,0,0,0,,52,52,187
+11,,44,44,172,,0,0,0,,44,44,172
+12,,72,72,171,,0,0,0,,72,72,171
+13,,48,48,150,,0,0,0,,48,48,150
+14,,56,56,155,,0,0,0,,56,56,155
+15,,45,45,121,,0,0,0,,45,45,121
+16,,54,54,126,,0,0,0,,54,54,126
+17,,86,86,161,,0,0,0,,86,86,161
+18,*,129,129,155,+,0,0,0,#,129,129,155
+19,,82,82,144,,0,0,0,,82,82,144
+20,,21,21,107,,0,0,0,,21,21,107
+21,,21,21,186,,0,0,0,,21,21,186
+22,,15,15,153,,0,0,0,,15,15,153
+23,,30,30,146,,0,0,0,,30,30,146
+24,,17,17,203,,0,0,0,,17,17,203
+Total,,=sum(C163:C186),=sum(D163:D186),"=Round(SUMPRODUCT(D163:D186,E163:E186)/D187)",,=sum(G163:G186),=sum(H163:H186),=sum(I163:I186),,=sum(K163:K186),=sum(L163:L186),"=Round(SUMPRODUCT(L163:L186,M163:M186)/L187)"
+,,
+Abbreviations:,,,,
+"Date           ",":The date of measurement.",,,,Hour," :The end hour of measurement."
+"Incoming Calls ",":Calls terminated  at subscriber.",,,,"Attempt ",": Number of call attempts made."
+"Outgoing Calls ",":Calls originated from subscriber.",,,,"Answer ",": Number of answered calls."
+"BHInd.   *     ",":Busy hr (Incoming Calls)",,,,"Duration ",":The average conversation time in secs calculated using Traffic"
+"+ : BHInd(Outgoing Calls)"
+"+ : BHInd(Total Calls)"
+"Generate Date:11/03/2019"
+"Daily 24 Hour Measurement of PBX Traffic Report"
+"Tel No	:",69586888,,,"Name	: SMRT Taxis Pte Ltd"
+"Date 		: ",09/03/2019,,,,"Lines	: 90"
+,"Incoming Calls",,,,"Outgoing Calls",,,,"Total Calls"
+Hour,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration
+1,,21,21,133,,0,0,0,,21,21,133
+2,,26,26,151,,0,0,0,,26,26,151
+3,,5,5,148,,0,0,0,,5,5,148
+4,,12,12,180,,0,0,0,,12,12,180
+5,,7,7,238,,0,0,0,,7,7,238
+6,,7,7,106,,0,0,0,,7,7,106
+7,,57,57,126,,0,0,0,,57,57,126
+8,,47,47,119,,0,0,0,,47,47,119
+9,*,107,107,128,+,0,0,0,#,107,107,128
+10,,31,31,159,,0,0,0,,31,31,159
+11,,27,27,155,,0,0,0,,27,27,155
+12,,49,49,156,,0,0,0,,49,49,156
+13,,50,50,188,,0,0,0,,50,50,188
+14,,34,34,143,,0,0,0,,34,34,143
+15,,24,24,171,,0,0,0,,24,24,171
+16,,16,16,217,,0,0,0,,16,16,217
+17,,23,23,116,,0,0,0,,23,23,116
+18,,32,32,159,,0,0,0,,32,32,159
+19,,31,31,148,,0,0,0,,31,31,148
+20,,24,24,95,,0,0,0,,24,24,95
+21,,13,13,167,,0,0,0,,13,13,167
+22,,25,25,195,,0,0,0,,25,25,195
+23,,20,20,134,,0,0,0,,20,20,134
+24,,13,13,155,,0,0,0,,13,13,155
+Total,,=sum(C202:C225),=sum(D202:D225),"=Round(SUMPRODUCT(D202:D225,E202:E225)/D226)",,=sum(G202:G225),=sum(H202:H225),=sum(I202:I225),,=sum(K202:K225),=sum(L202:L225),"=Round(SUMPRODUCT(L202:L225,M202:M225)/L226)"
+,,
+Abbreviations:,,,,
+"Date           ",":The date of measurement.",,,,Hour," :The end hour of measurement."
+"Incoming Calls ",":Calls terminated  at subscriber.",,,,"Attempt ",": Number of call attempts made."
+"Outgoing Calls ",":Calls originated from subscriber.",,,,"Answer ",": Number of answered calls."
+"BHInd.   *     ",":Busy hr (Incoming Calls)",,,,"Duration ",":The average conversation time in secs calculated using Traffic"
+"+ : BHInd(Outgoing Calls)"
+"+ : BHInd(Total Calls)"
+"Generate Date:11/03/2019"
+"Daily 24 Hour Measurement of PBX Traffic Report"
+"Tel No	:",69586888,,,"Name	: SMRT Taxis Pte Ltd"
+"Date 		: ",10/03/2019,,,,"Lines	: 90"
+,"Incoming Calls",,,,"Outgoing Calls",,,,"Total Calls"
+Hour,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration,BHInd,Attempt,Answer,Duration
+1,,15,15,161,,0,0,0,,15,15,161
+2,,16,16,71,,0,0,0,,16,16,71
+3,,13,13,53,,0,0,0,,13,13,53
+4,,11,11,61,,0,0,0,,11,11,61
+5,,12,12,139,,0,0,0,,12,12,139
+6,,14,14,161,,0,0,0,,14,14,161
+7,,45,45,137,,0,0,0,,45,45,137
+8,,43,43,133,,0,0,0,,43,43,133
+9,,52,52,140,,0,0,0,,52,52,140
+10,*,53,53,109,+,0,0,0,#,53,53,109
+11,,35,35,140,,0,0,0,,35,35,140
+12,,35,35,151,,0,0,0,,35,35,151
+13,,45,45,141,,0,0,0,,45,45,141
+14,,39,39,120,,0,0,0,,39,39,120
+15,,25,25,135,,0,0,0,,25,25,135
+16,,15,15,151,,0,0,0,,15,15,151
+17,,21,21,180,,0,0,0,,21,21,180
+18,,31,31,148,,0,0,0,,31,31,148
+19,,23,23,144,,0,0,0,,23,23,144
+20,,12,12,101,,0,0,0,,12,12,101
+21,,19,19,140,,0,0,0,,19,19,140
+22,,26,26,118,,0,0,0,,26,26,118
+23,,19,19,200,,0,0,0,,19,19,200
+24,,12,12,117,,0,0,0,,12,12,117
+Total,,=sum(C241:C264),=sum(D241:D264),"=Round(SUMPRODUCT(D241:D264,E241:E264)/D265)",,=sum(G241:G264),=sum(H241:H264),=sum(I241:I264),,=sum(K241:K264),=sum(L241:L264),"=Round(SUMPRODUCT(L241:L264,M241:M264)/L265)"
+,,
+Abbreviations:,,,,
+"Date           ",":The date of measurement.",,,,Hour," :The end hour of measurement."
+"Incoming Calls ",":Calls terminated  at subscriber.",,,,"Attempt ",": Number of call attempts made."
+"Outgoing Calls ",":Calls originated from subscriber.",,,,"Answer ",": Number of answered calls."
+"BHInd.   *     ",":Busy hr (Incoming Calls)",,,,"Duration ",":The average conversation time in secs calculated using Traffic"
+"+ : BHInd(Outgoing Calls)"
+"+ : BHInd(Total Calls)"
+,,,,,"-----------End of Report-----------",,
