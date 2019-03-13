@@ -13,20 +13,6 @@
  
 Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::group(['prefix' => 'downloads'], function() {
-  //Route::resource('/','downloadController');
-  //Route::post('/','downloadController@index');
-  Route::get('/daily','downloadController@dailydownload');
-  Route::get('/weekly','downloadController@weeklydownload');
-  Route::get('/sevendays','downloadController@sevendaysdownload');
-  Route::get('/export','downloadController@export');
-
-});
-
 Route::group(['prefix' => 'cms', 'middleware' => 'auth'], function() {
     Route::resource('/', 'Cms\HomeController');
 	Route::get('/dstats/', 'Cms\HomeController@dashboardStats');
