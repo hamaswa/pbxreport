@@ -35,7 +35,8 @@ class HomeController extends Controller
 	public function dashboardStats()
     {
         $dashboardReport = $this->reportRepository->DashboardReport();
-		$dashboardReport['TotalCalls'] = $dashboardReport['Abandoned']+$dashboardReport['Answered'];
+
+		//$dashboardReport['TotalCalls'] = $dashboardReport['Abandoned']+$dashboardReport['Answered'];
 		
 		if($dashboardReport['TotalCalls']==0) 
 			$Connect=1; 
@@ -60,6 +61,7 @@ class HomeController extends Controller
 		$dashboardReport['TalkTime'] = gmdate("H:i:s", $TotalTime/$TotalAnswer);
 		$dashboardReport['WaitTime'] = gmdate("H:i:s", $dashboardReport['WaitTime']/$TotalAnswer);
 		$dashboardReport['Holdtime'] = gmdate("H:i:s", $dashboardReport['Holdtime']/$TotalAnswer);
+
 		//$dashboardReport['TalkTime'] = gmdate("H:i:s", round($dashboardReport['TalkTime']/($TotalTime*100)));
 		//$dashboardReport['WaitTime'] = gmdate("H:i:s", round($dashboardReport['WaitTime']/($TotalTime*100)));
 		

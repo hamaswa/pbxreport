@@ -126,7 +126,7 @@
                                                 <td>{{ $data->Direction }}</td>
                                                 <td>{{ $data->ringtime }}</td>
                                                 <td>{{ $data->billsec }}</td>
-                                                <td><a href="http://52.77.221.195/pbxreport/public/download.php?id={{ $data->Recording }}">{{ $data->Recording }}</a></td>
+                                                <td><a href="/pbxreport/public/download.php?id={{ $data->Recording }}">{{ $data->Recording }}</a></td>
                                                 <td>{{ $data->disposition }}</td>
                                             </tr>
                                          @endforeach

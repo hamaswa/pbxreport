@@ -73,7 +73,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td>Unanswered Rate:</td>
+                                    <td>Answered Rate:</td>
                                     <td>{!! $total_calls['AnswerRate'] !!} %</td>
                                 </tr>
                                 <tr>

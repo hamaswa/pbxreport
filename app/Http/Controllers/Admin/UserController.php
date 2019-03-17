@@ -73,13 +73,13 @@ class UserController extends AppBaseController
         $this->temp_ext = array();
         $where = "user not in ($ext)";
         if($ext!=0)
-        $data = DB::connection('mysql')->table('qagent')->select(DB::raw('agent_id,agent'))->whereRaw($where)->get()->toArray();
+        $data = DB::connection('mysql4')->table('devices')->select(DB::raw('id,description'))->whereRaw($where)c;
         else
-        $data = DB::connection('mysql')->table('qagent')->select(DB::raw('agent_id,agent'))->get()->toArray();
+        $data = DB::connection('mysql4')->table('devices')->select(DB::raw('id,description'))->get()->toArray();
 
         $data = json_decode(json_encode($data), true);
         foreach ($data as $item) {
-            $this->temp_ext[$item['agent']]=$item['agent'];
+            $this->temp_ext[$item['id']]=$item['description'];
         }
         return $this->temp_ext;
     }

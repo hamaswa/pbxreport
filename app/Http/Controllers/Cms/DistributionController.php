@@ -18,7 +18,8 @@ class DistributionController extends AppBaseController
     public function index(Request $request){
         $data['queue']=  Auth::User()->queue()->Pluck("queue","queue")->ToArray();
         $data['queue_sel']= Auth::User()->queue()->Pluck("queue")->ToArray();
-        $data['extension']=  Auth::User()->Extension()->Pluck("extension_no","extension_no")->ToArray();
+        $data['extension'] = $this->repo->extensions(implode(',',Auth::User()->Extension()->Pluck("extension_no")->ToArray()));
+
         $data['extension_sel']=  Auth::User()->Extension()->Pluck("extension_no")->ToArray();
         return view('cms.reports.distributionform',$data);
     }

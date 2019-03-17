@@ -13,7 +13,7 @@ $year=substr($value2[3],0,4);
 $month=substr($value2[3],-4,2);
 $day=substr($value2[3],-2,2);
 $file="/var/spool/asterisk/monitor/".$year."/".$month."/".$day. "/".$value;
-
+echo $file;
 
 if (file_exists($file)) {
     header('Content-Description: File Transfer');
