@@ -711,7 +711,7 @@ class ReportsRepository {
         $json['period'] = round((strtotime($end)  - strtotime($start)) / (60 * 60 * 24))+1;
         $json['datefrom'] = $start;
         $json['dateto'] = $end;
-        $json['agents'] = isset($req['agents'])?implode(',',$req['agents']):"00";
+        $json['agents'] = isset($req['agents'])?implode(',',$req['agents']):"N0NE";
         $ext = '"'.implode('","',$this->extensions($json['agents'])) .'"';
 
 
@@ -724,11 +724,14 @@ class ReportsRepository {
                   Ceiling(sum(CASE verb When 'ABANDON' Then 1 else 0 End)*100/count(distinct call_id)) as abandonavg
                   from queue_log where verb in ('connect','abandon','ENTERQUEUE') 
                   and queue in (" . $json['available_queue'] . ")
+                  and call_id in 
                   
+                  (select call_id from queue_log 
+                        where (agent in ($ext) and verb='connect') 
+                        or verb='abandon')
+
                   and DATE_FORMAT(created, '%H:%i') between '" . $starthr . "' and '" . $endhr . "'
                   and created between '" . $start . " 00:00:00' and '" . $end . " 23:59:59'";
-
-
 
         $Result = DB::connection('mysql2')->select($query);
 
@@ -769,7 +772,12 @@ class ReportsRepository {
                   from queue_log where 
                   verb in ('connect','abandon','ENTERQUEUE') 
                   and queue in (" . $json['available_queue'] . ")
-                   and agent in (". $ext.")
+                  
+                  and call_id in 
+                        (select call_id from queue_log 
+                        where (agent in ($ext) and verb='connect') 
+                        or verb='abandon')
+                        
                   and created between '" . $start . "  00:00:00' and '"  . $end . " 23:59:59' group by queue";
 
 
@@ -793,7 +801,12 @@ class ReportsRepository {
                   count(if(verb='EXITWITHTIMEOUT',1,NULL)) unanswered
                   from queue_log where  
                   queue in (" . $json['available_queue'] . ")
-                  and agent in (". $ext.") 
+                  
+                  and call_id in                  
+                  (select call_id from queue_log 
+                        where (agent in ($ext) and verb='connect') 
+                        or verb='abandon')
+                        
                   and verb IN ('ABANDON', 'CONNECT','ENTERQUEUE')
                   and created between '" . $start . " 00:00:00' and '" . $end . " 23:59:59' group by month order by id";
 
@@ -818,7 +831,12 @@ class ReportsRepository {
                   Ceiling(count(if(verb='abandon',1,NULL))*100/count(distinct call_id)) as abandonavg
                   FROM queue_log where 
                   queue in (" . $json['available_queue'] . ")
-                   and agent in (". $ext.") 
+
+                    and call_id in               
+                        (select call_id from queue_log 
+                        where (agent in ($ext) and verb='connect') 
+                        or verb='abandon')                  
+                  
                   and verb IN ('ABANDON', 'CONNECT','ENTERQUEUE')
                   and created between '" . $start . " 00:00:00' and '" . $end . " 23:59:59' " . $groupby . " order by id";
 
@@ -847,7 +865,11 @@ class ReportsRepository {
                   count(if(verb='EXITWITHTIMEOUT',1,NULL)) unanswered
                   FROM queue_log where 
                   queue in (" . $json['available_queue'] . ")
-                  and agent in (". $ext .") 
+
+                  and call_id in                  
+                  (select call_id from queue_log 
+                        where (agent in ($ext) and verb='connect') 
+                        or verb='abandon')
                   and verb IN ('ABANDON', 'CONNECT','ENTERQUEUE')
                   and created between '" . $start . " 00:00:00' and '" . $end . " 23:59:59' " . $groupby . " order by id";
 
@@ -877,7 +899,7 @@ class ReportsRepository {
                   count(if(verb='EXITWITHTIMEOUT',1,NULL)) unanswered
                   FROM queue_log where 
                   queue in (" . $json['available_queue'] . ")
-                   and agent in (". $ext .") 
+                  and (agent in (". $ext.") or agent ='NONE')
                   and verb IN ('ABANDON', 'CONNECT','ENTERQUEUE')
                   and DATE_FORMAT(created, '%H:%i') between '" . $starthr . "' and '" . $endhr . "'
                   and created between '" . $start . " 00:00:00' and '" . $end . " 23:59:59' " . $groupby . " order by hour";
@@ -909,7 +931,7 @@ class ReportsRepository {
                   count(if(verb='EXITWITHTIMEOUT',1,NULL)) unanswered
                   FROM queue_log where 
                   queue in (" . $json['available_queue'] . ")
-                  and agent in (". $ext .") 
+                  and (agent in (". $ext.") or agent ='NONE')
                   and verb IN ('ABANDON', 'CONNECT','ENTERQUEUE')
                   and created between '" . $start . " 00:00:00' and '" . $end . " 23:59:59' " . $groupby . " order by DAYOFWEEK(created)";
 

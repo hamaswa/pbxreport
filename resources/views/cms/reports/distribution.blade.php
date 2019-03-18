@@ -63,10 +63,7 @@
                                     <td>Number of Answered Calls:</td>
                                     <td>{!! $total_calls['Answered'] !!}</td>
                                 </tr>
-                                <tr>
-                                    <td>Number of Unanswered Calls:</td>
-                                    <td> calls</td>
-                                </tr>
+
                                 <tr>
                                     <td>Number of Abandoned Calls:</td>
                                     <td>{!! $total_calls['Abandoned'] !!} calls</td>

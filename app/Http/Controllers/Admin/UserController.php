@@ -73,7 +73,7 @@ class UserController extends AppBaseController
         $this->temp_ext = array();
         $where = "user not in ($ext)";
         if($ext!=0)
-        $data = DB::connection('mysql4')->table('devices')->select(DB::raw('id,description'))->whereRaw($where)c;
+        $data = DB::connection('mysql4')->table('devices')->select(DB::raw('id,description'))->whereRaw($where);
         else
         $data = DB::connection('mysql4')->table('devices')->select(DB::raw('id,description'))->get()->toArray();
 
