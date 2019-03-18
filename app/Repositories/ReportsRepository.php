@@ -249,7 +249,7 @@ class ReportsRepository {
             $json['TotalCalls'] = $row->totalcalls;
             $json['Abandoned'] = (isset($row->abandon)?$row->abandon:0);
             $json['Answered'] = (isset($row->answered)?$row->answered:0);
-            $json['Holdtime'] = (isset($row->holdtime)?$row->holdtime:0);
+            $json['Holdtime'] = strtotime(isset($row->holdtime)?$row->holdtime:0);
 
         }
 

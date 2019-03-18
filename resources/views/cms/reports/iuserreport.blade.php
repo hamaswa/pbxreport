@@ -127,7 +127,7 @@
                                                 <td>{{ $data->Direction }}</td>
                                                 <td>{{ $data->ringtime }}</td>
                                                 <td>{{ $data->billsec }}</td>
-                                                <td><a href="{{\http\Env\Url}}download.php?id={{ $data->Recording }}">{{ $data->Recording }}</a></td>
+                                                <td><a href="{{ asset("/") }}download.php?id={{ $data->Recording }}">{{ $data->Recording }}</a></td>
                                                 <td>{{ $data->disposition }}</td>
                                             </tr>
                                          @endforeach

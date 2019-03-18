@@ -146,7 +146,9 @@
                               <table class="table table-hover" id="datareport">
                                   <thead id="thead"><tr><th>id</th><th>time_id</th><th>call_id</th><th>queue</th><th>verb</th><th>queuename</th><th>agent</th><th>event</th><th>data</th><th>data1</th><th>data2</th><th>data3</th><th>data4</th><th>data5</th><th>partition</th><th>created</th></tr></thead>
                                   <tbody id="realBody">
-                                  <tr><td>47453</td><td>1542168435</td><td>1542168425.12</td><td>4002</td><td>ENTERQUEUE</td><td></td><td>NONE</td><td></td><td></td><td></td><td>83213141</td><td>1</td><td></td><td></td><td>P001</td><td>2018-11-14 09:07:15</td></tr>
+                                  <tr><td>47453</td><td>1542168435</td><td>1542168425.12</td>
+                                      <td>4002</td><td>ENTERQUEUE</td><td></td><td>NONE</td>
+                                      <td></td><td></td><td></td><td>83213141</td><td>1</td><td></td><td></td><td>P001</td><td>2018-11-14 09:07:15</td></tr>
 
 
                                   </tbody>
