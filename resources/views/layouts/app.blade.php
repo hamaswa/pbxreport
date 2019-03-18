@@ -195,7 +195,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-              <li><a href="{{URL::asset('/')}}cms/distribution#distribution_summary"><i class="fa fa-circle-o"></i> Distribution Summary </a></li>
+             <li><a href="{{URL::asset('/')}}cms/distribution"><i class="fa fa-circle-o"></i> Distribution  </a></li>
+             <li><a href="{{URL::asset('/')}}cms/distribution#distribution_summary"><i class="fa fa-circle-o"></i> Distribution Summary </a></li>
               <li><a href="{{URL::asset('/')}}cms/distribution#distribution_by_queue"><i class="fa fa-circle-o"></i> Distribution by queue </a></li>
               <li><a href="{{URL::asset('/')}}cms/distribution#distribution_per_month"><i class="fa fa-circle-o"></i> Distribution per month </a></li>
               <li><a href="{{URL::asset('/')}}cms/distribution#distribution_per_week"><i class="fa fa-circle-o"></i> Distribution per week </a></li>
