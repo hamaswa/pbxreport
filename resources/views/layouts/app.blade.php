@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="{{ URL::asset('/') }}adminLTE/plugins/daterangepicker/daterangepicker.css">
   <!-- bootstrap datepicker -->
   <link rel="stylesheet" href="{{ URL::asset('/') }}adminLTE/plugins/datepicker/datepicker3.css">
-  <link rel="stylesheet" href="{{ URL::asset('../') }}/resources/assets/jqplot/jquery.jqplot.min.css">
+  <link rel="stylesheet" href="{{ URL::asset('/') }}jqplot/jquery.jqplot.min.css">
 
 
   @stack('style')
