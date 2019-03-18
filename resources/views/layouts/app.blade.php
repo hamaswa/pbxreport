@@ -269,13 +269,13 @@
 <script src="{{ URL::asset('/') }}adminLTE/plugins/chartjs/Chart.min.js"></script>
 
 <!-- jqplot (Chart) -->
-<script  src="{{ URL::asset('../') }}/resources/assets/jqplot/jquery.jqplot.min.js"></script>
-<script  src="{{ URL::asset('../') }}/resources/assets/jqplot/plugins/jqplot.barRenderer.min.js"></script>
-<script  src="{{ URL::asset('../') }}/resources/assets/jqplot/plugins/jqplot.highlighter.min.js"></script>
-<script  src="{{ URL::asset('../') }}/resources/assets/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-<script  src="{{ URL::asset('../') }}/resources/assets/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
-<script  src="{{ URL::asset('../') }}/resources/assets/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
-<script  src="{{ URL::asset('../') }}/resources/assets/jqplot/plugins/jqplot.pointLabels.min.js"></script>
+<script  src="{{ URL::asset('/') }}jqplot/jquery.jqplot.min.js"></script>
+<script  src="{{ URL::asset('/') }}jqplot/plugins/jqplot.barRenderer.min.js"></script>
+<script  src="{{ URL::asset('/') }}jqplot.highlighter.min.js"></script>
+<script  src="{{ URL::asset('/') }}jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script  src="{{ URL::asset('/') }}jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script  src="{{ URL::asset('/') }}jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+<script  src="{{ URL::asset('/') }}jqplot/plugins/jqplot.pointLabels.min.js"></script>
 
 <script type="text/javascript">
 	$(".select2").select2({dropdownAutoWidth : true,width: '100%'});
