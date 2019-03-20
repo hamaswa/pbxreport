@@ -225,15 +225,13 @@ class ReportsRepository {
         $query .= (isset($queue) and $queue!="") ? " and queue IN ($queue)":"";
         $query .= "  and created between '".$start."' and '".$end."')";
 
-        echo $query.PHP_EOL;
-
         $Result = DB::connection('mysql2')->select($query);
         foreach($Result as $row)
         {
             $json['Received'] = $row->answer;
         }
 
-        $query = "select queue, count(distinct call_id) as totalcalls,
+        $query = "select count(distinct call_id) as totalcalls,
                   count(if(verb='abandon',1,NULL)) as abandon, 
                   count(if(verb='connect',1,NULL)) as answered,
                   Ceiling(count(if(verb='connect',1,NULL))*100/count(distinct call_id)) as answeravg,
@@ -242,9 +240,6 @@ class ReportsRepository {
                   verb in ('connect','abandon','ENTERQUEUE') 
                   and created between '" . $start . "' and '" . $end . "'";
         $query .= (isset($queue) and $queue!="") ? " and queue IN ($queue)":"";
-
-        echo $query.PHP_EOL;
-
 
         $Result = DB::connection('mysql2')->select($query);
         foreach($Result as $row)
