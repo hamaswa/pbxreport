@@ -201,6 +201,7 @@ class ReportsRepository {
         }*/
         $queue =  implode(',',Auth::User()->queue()->Pluck("queue","queue")->ToArray());
 
+
         /*
 
         $query = "select sum(incall) as incall, sum(answer) as answer, sum(abandon) as abandon, sum(holdtime) as holdtime 
@@ -216,10 +217,13 @@ class ReportsRepository {
         */
 
         $query = "select count(*) as answer from queue_log 
-                    where verb in ('CONNECT') and created between '".$start."' and '".$end."' 
-                    and queue IN ($queue) and call_id not in 
-                    ( select call_id from queue_log where verb in ('COMPLETEAGENT', 'COMPLETECALLER')                    
-                    and queue IN ($queue)  and created between '".$start."' and '".$end."')";
+                    where verb in ('CONNECT') and created between '".$start."' and '".$end."'";
+        $query .= (isset($queue) and $queue!="") ? " and queue IN ($queue)":"";
+        
+        $query .=  " and call_id not in 
+                    (select call_id from queue_log where verb in ('COMPLETEAGENT', 'COMPLETECALLER')";
+        $query .= (isset($queue) and $queue!="") ? " and queue IN ($queue)":"";
+        $query .= "  and created between '".$start."' and '".$end."')";
 
 
         $Result = DB::connection('mysql2')->select($query);
@@ -228,11 +232,6 @@ class ReportsRepository {
             $json['Received'] = $row->answer;
         }
 
-
-        $query = "select count(distinct call_id) as totalcalls from queue_log 
-                    where created between '".$start."' and '".$end."' 
-                    and queue IN ($queue)";
-
         $query = "select queue, count(distinct call_id) as totalcalls,
                   count(if(verb='abandon',1,NULL)) as abandon, 
                   count(if(verb='connect',1,NULL)) as answered,
@@ -240,8 +239,9 @@ class ReportsRepository {
                   Ceiling(count(if(verb='abandon',1,NULL))*100/count(distinct call_id)) as abandonavg
                   from queue_log where 
                   verb in ('connect','abandon','ENTERQUEUE') 
-                  and queue in ($queue)
                   and created between '" . $start . "' and '" . $end . "'";
+        $query .= (isset($queue) and $queue!="") ? " and queue IN ($queue)":"";
+
 
         $Result = DB::connection('mysql2')->select($query);
         foreach($Result as $row)
@@ -254,7 +254,9 @@ class ReportsRepository {
         }
 
         $query = "select ROUND(sum(data1)) AS waittime from queue_log where verb='CONNECT' 
-                  and queue IN ($queue) and created between '".$start."' and '".$end."'";
+                  and  created between '".$start."' and '".$end."'";
+        $query .= (isset($queue) and $queue!="") ? " and queue IN ($queue)":"";
+
         $Result = DB::connection('mysql2')->select($query);
         foreach($Result as $row)
         {
@@ -264,7 +266,9 @@ class ReportsRepository {
         }
 
         $query = "select ROUND(sum(data2)) AS talktime from queue_log where verb='COMPLETEAGENT' 
-                  and queue IN ($queue) and created between '".$start."' and '".$end."'";
+                  and created between '".$start."' and '".$end."'";
+        $query .= (isset($queue) and $queue!="") ? " and queue IN ($queue)":"";
+
         $Result = DB::connection('mysql2')->select($query);
         foreach($Result as $row)
         {
@@ -273,7 +277,9 @@ class ReportsRepository {
         }
 
         $query = "select sum(data2) AS totaltime from queue_log where verb in ('COMPLETECALLER', 'COMPLETEAGENT') 
-                  and queue IN ($queue) and created between '".$start."' and '".$end."'";
+                  and  created between '".$start."' and '".$end."'";
+        $query .= (isset($queue) and $queue!="") ? " and queue IN ($queue)":"";
+
         $Result = DB::connection('mysql2')->select($query);
         foreach($Result as $row)
         {
@@ -283,8 +289,10 @@ class ReportsRepository {
 
         $query = "select count(*) as waiting from queue_log 
                     where verb in ('ENTERQUEUE') and created between '".$start."' and '".$end."' 
-                    and call_id not in ( select call_id from queue_log where verb in ('CONNECT', 'ABANDON')  and 
-                    queue IN ($queue)  and created between '".$start."' and '".$end."')";
+                    and call_id not in ( select call_id from queue_log where verb in ('CONNECT', 'ABANDON') 
+                    and created between '".$start."' and '".$end."')";
+        $query .= (isset($queue) and $queue!="") ? " and queue IN ($queue)":"";
+
         $Result = DB::connection('mysql2')->select($query);
         foreach($Result as $row)
         {

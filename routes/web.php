@@ -13,6 +13,7 @@
  
 Auth::routes();
 
+//route::get("/","cms\HomeController@index");
 Route::group(['prefix' => 'cms', 'middleware' => 'auth'], function() {
     Route::resource('/', 'Cms\HomeController');
 	Route::get('/dstats/', 'Cms\HomeController@dashboardStats');
