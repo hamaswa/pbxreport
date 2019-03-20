@@ -225,6 +225,7 @@ class ReportsRepository {
         $query .= (isset($queue) and $queue!="") ? " and queue IN ($queue)":"";
         $query .= "  and created between '".$start."' and '".$end."')";
 
+        echo $query.PHP_EOL;
 
         $Result = DB::connection('mysql2')->select($query);
         foreach($Result as $row)
@@ -241,6 +242,8 @@ class ReportsRepository {
                   verb in ('connect','abandon','ENTERQUEUE') 
                   and created between '" . $start . "' and '" . $end . "'";
         $query .= (isset($queue) and $queue!="") ? " and queue IN ($queue)":"";
+
+        echo $query.PHP_EOL;
 
 
         $Result = DB::connection('mysql2')->select($query);
