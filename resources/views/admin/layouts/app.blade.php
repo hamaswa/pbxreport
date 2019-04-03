@@ -112,13 +112,13 @@
                   <a href="{{ url('admin/changepassword') }}" class="btn btn-default btn-flat">Change Password</a>
                 </div>
                 <div class="pull-right">
-                    <a href="{{ url('logout') }}" class="btn btn-default btn-flat"
+                    <a href="{{ url('admin/logout') }}" class="btn btn-default btn-flat"
                         onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">
                         Logout
                     </a>
 
-                    <form id="logout-form" action="{{ url('logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form" action="{{ url('admin/logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
                 </div>

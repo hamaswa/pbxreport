@@ -63,7 +63,6 @@ class ReportsController extends AppBaseController
 	{
 		$userExtensions = Auth::User()->Extension()->Pluck("extension_no")->ToArray();
 		$userExtensions[] = Auth::User()->did_no;
-		print_r($userExtensions);
 		$info_Realtime = Realtime::WhereIn('extension', $userExtensions)->Get();
 		return response()->json($info_Realtime);
 	}

@@ -12,6 +12,7 @@
 */
  
 Auth::routes();
+Route::get('/', 'Cms\HomeController@index');
 
 //route::get("/","cms\HomeController@index");
 Route::group(['prefix' => 'cms', 'middleware' => 'auth'], function() {
@@ -45,12 +46,11 @@ Route::group(['prefix' => 'cms', 'middleware' => 'auth'], function() {
 	Route::get('/changepassword', 'Cms\HomeController@showChangePassword');
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin',], function () {
   Route::get('/', 'AdminAuth\LoginController@showLoginForm');
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm');
   Route::post('/login', 'AdminAuth\LoginController@login');
-    Route::post('/logout', 'AdminAuth\LoginController@logout');
-    Route::get('/logout', 'AdminAuth\LoginController@logout');
+
 
   Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm');
   Route::post('/register', 'AdminAuth\RegisterController@register');
@@ -69,6 +69,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
 	
 	Route::post('/changepassword', 'Admin\HomeController@resetPassword');
   	Route::get('/changepassword', 'Admin\HomeController@showChangePassword');
+    Route::post('/logout', 'AdminAuth\LoginController@logout');
+    Route::get('/logout', 'AdminAuth\LoginController@logout');
 	Route::post('/getextension', 'Admin\ExtensionController@getExt');
 	Route::post('/addextension', 'Admin\ExtensionController@addExt');
 	Route::post('/deleteextension', 'Admin\ExtensionController@deleteExt');

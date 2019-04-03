@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Validator;
+
 use Illuminate\Http\Request;
 use App\Repositories\ReportsRepository;
 use Auth;
@@ -24,7 +26,26 @@ class DistributionController extends AppBaseController
         return view('cms.reports.distributionform',$data);
     }
 
+    public function messages()
+    {
+        return [
+            'queue.required' => 'Queue is required. Select atleast One',
+            'extension.required'  => 'An Extension is required. Select atleast One',
+        ];
+    }
+
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'queue' => 'required',
+            'agents' => 'required',
+        ]);
+    }
+
     public function distribution(Request $request){
+        $this->validator($request->all())->validate();
+
         $req = $request->all();
         $this->data = $this->repo->distribution($req);
         return view('cms.reports.distribution',$this->data);

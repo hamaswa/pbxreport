@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Hesto\MultiAuth\Traits\LogsoutGuard;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -51,6 +52,8 @@ class LoginController extends Controller
         return view('admin.auth.login');
     }
 
+
+
     /**
      * Get the guard to be used during authentication.
      *
@@ -59,5 +62,27 @@ class LoginController extends Controller
     protected function guard()
     {
         return Auth::guard('admin');
+    }
+
+
+    public function logout(Request $request)
+    {
+        $activeGuards = 0;
+        $this->guard()->logout();
+
+        foreach (config('auth.guards') as $guard => $guardConfig) {
+            if ($guardConfig['driver'] === 'session') {
+                if ($this->isActiveGuard($request, $guard)) {
+                    $activeGuards++;
+                }
+            }
+        }
+
+        if ( ! $activeGuards) {
+            $request->session()->flush();
+            $request->session()->regenerate();
+        }
+
+        return redirect()->to("/admin");
     }
 }

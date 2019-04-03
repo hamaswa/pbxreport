@@ -231,14 +231,14 @@ class ReportsRepository {
             $json['Received'] = $row->answer;
         }
 
-        $query = "select count(distinct call_id) as totalcalls,
-                  count(if(verb='abandon',1,NULL)) as abandon, 
-                  count(if(verb='connect',1,NULL)) as answered,
-                  Ceiling(count(if(verb='connect',1,NULL))*100/count(distinct call_id)) as answeravg,
-                  Ceiling(count(if(verb='abandon',1,NULL))*100/count(distinct call_id)) as abandonavg
-                  from queue_log where 
-                  verb in ('connect','abandon','ENTERQUEUE') 
-                  and created between '" . $start . "' and '" . $end . "'";
+        $query = "select  count( if(verb='abandon',1,NULL)) as abandon,
+                    count(if(verb='connect',1,NULL)) as answered,
+                    count(if(verb='enterqueue',1,NULL)) as totalcalls,
+                    Ceiling(count(if(verb='connect',1,NULL))*100/count( if(verb='enterqueue',1,NULL))) as answeravg, 
+                    Ceiling(count( if(verb='abandon',1,NULL))*100/count( if(verb='enterqueue',1,NULL))) as abandonavg
+                    from queue_log where 
+                    verb in ('connect','abandon','ENTERQUEUE') 
+                    and created between '" . $start . "' and '" . $end . "'";
         $query .= (isset($queue) and $queue!="") ? " and queue IN ($queue)":"";
 
         $Result = DB::connection('mysql2')->select($query);
@@ -625,7 +625,8 @@ class ReportsRepository {
                 $queue = $req['typeval'];
                 $query = "Select distinct call_id, created as date, verb,agent,event,data,data1,data2,data3,data4
                          from queue_log 
-                         where verb in ('connect','abandon','ENTERQUEUE') and created >= '" . $start . "' and queue in (" . $queue . ")";
+                         where verb in ('connect','abandon','ENTERQUEUE') and created >= '" . $start . "' 
+                         and queue in (" . (isset($queue) and $queue!=""?$queue:"queuequeue"). ")";
                 $json['data'] = DB::connection('mysql2')->select($query);
                 return $json;
                 break;
@@ -637,7 +638,7 @@ class ReportsRepository {
                          where created>='" . $start . "' 
                          and DATE_FORMAT(created,'%M %Y') = '" . $month . "' 
                          and verb in ('connect','abandon','ENTERQUEUE') 
-                         and queue in (" . $queue . ")";
+                         and queue in (" . (isset($queue) and $queue!=""?$queue:"queuequeue"). ")";
                 $json['data'] = DB::connection('mysql2')->select($query);
 
                 return $json;
@@ -650,7 +651,7 @@ class ReportsRepository {
                          where Week(created) = '" . $week . "' 
                          and created>='".$start."' 
                          and verb in ('connect','abandon','ENTERQUEUE') 
-                         and queue in (" . $queue . ")";
+                         and queue in (" . (isset($queue) and $queue!=""?$queue:"queuequeue"). ")";
                 $json['data'] = DB::connection('mysql2')->select($query);
                 return $json;
                 break;
@@ -662,7 +663,7 @@ class ReportsRepository {
                          from queue_log 
                          where Date_format(created,'%Y-%m-%d') = '" . $day . "'  
                          and verb in ('connect','abandon','ENTERQUEUE') 
-                         and queue in (" . $queue . ")";
+                         and queue in (" . (isset($queue) and $queue!=""?$queue:"queuequeue"). ")";
                 $json['data'] = DB::connection('mysql2')->select($query);
                 return $json;
                 break;
@@ -674,7 +675,7 @@ class ReportsRepository {
                          from queue_log 
                          where hour(created) = '" . $hour . "' and created >= '". $start ."'  
                          and verb in ('connect','abandon','ENTERQUEUE')
-                         and queue in (" . $queue . ")";
+                         and queue in (" . (isset($queue) and $queue!=""?$queue:"queuequeue"). ")";
 
                 $json['data'] = DB::connection('mysql2')->select($query);
                 return $json;
@@ -686,7 +687,7 @@ class ReportsRepository {
                          from queue_log
                          where Date_format(created,'%Y-%m-%d') = '" . $day . "'
                          and created >= '". $start ."'  and verb in ('connect','abandon','ENTERQUEUE')
-                         and queue in (" . $queue . ")";
+                         and queue in (" . (isset($queue) and $queue!=""?$queue:"queuequeue"). ")";
                 $json['data'] = DB::connection('mysql2')->select($query);
                 return $json;
                 break;
@@ -723,7 +724,7 @@ class ReportsRepository {
 
 
 
-        $query = "select count(distinct call_id) as received,
+        $query = "select sum(CASE verb When 'ENTERQUEUE' Then 1 else 0 End) as received,
                   sum(CASE verb When 'ABANDON' Then 1 else 0 End) as abandon, 
                   sum(CASE verb When 'CONNECT' Then 1 else 0 End) as answered,
                   Ceiling(sum(CASE verb When 'CONNECT' Then 1 else 0 End)*100/count(distinct call_id)) as answeravg,
@@ -770,7 +771,7 @@ class ReportsRepository {
         //$json['total_calls']['AbandonRate'] = round($json['total_calls']['Abandoned'] * 100 / $json['total_calls']['Received']);
         //$json['total_calls']['AnswerRate'] = round($json['total_calls']['Answered'] * 100 / $json['total_calls']['Received']);
 
-        $query = "select queue, count(distinct call_id) as received,
+        $query = "select queue, sum(CASE verb When 'ENTERQUEUE' Then 1 else 0 End) as received,
                   count(if(verb='abandon',1,NULL)) as abandon, 
                   count(if(verb='connect',1,NULL)) as answered,
                   Ceiling(count(if(verb='connect',1,NULL))*100/count(distinct call_id)) as answeravg,
@@ -799,7 +800,8 @@ class ReportsRepository {
 //        }
 
 
-        $query = "select DATE_FORMAT(created,'%M %Y') as month,queue, count(distinct call_id) as received,
+        $query = "select DATE_FORMAT(created,'%M %Y') as month,queue, 
+                  sum(CASE verb When 'ENTERQUEUE' Then 1 else 0 End) as received,
                   count(if(verb='abandon',1,NULL)) as abandon, 
                   count(if(verb='connect',1,NULL)) as answered,
                   Ceiling(count(if(verb='connect',1,NULL))*100/count(distinct call_id)) as answeravg,
@@ -830,7 +832,7 @@ class ReportsRepository {
         $groupby = "Group by Month(created), Week(created)";
 
         $query = "select Week(created) AS week, 
-                   queue, count(distinct call_id) as received,
+                   queue, sum(CASE verb When 'ENTERQUEUE' Then 1 else 0 End) as received,
                   count(if(verb='abandon',1,NULL)) as abandon, 
                   count(if(verb='connect',1,NULL)) as answered,
                   Ceiling(count(if(verb='connect',1,NULL))*100/count(distinct call_id)) as answeravg,
@@ -863,7 +865,7 @@ class ReportsRepository {
         $groupby = "Group by day";
 
         $query = "select Date_format(created,'%Y-%m-%d') AS day, 
-                  count(distinct call_id) as received,
+                  sum(CASE verb When 'ENTERQUEUE' Then 1 else 0 End) as received,
                   count(if(verb='abandon',1,NULL)) as abandon, 
                   count(if(verb='connect',1,NULL)) as answered,
                   Ceiling(count(if(verb='connect',1,NULL))*100/count(distinct call_id)) as answeravg,
@@ -897,7 +899,7 @@ class ReportsRepository {
         $groupby = "Group by hour";
 
         $query = "select Hour(created) AS hour, 
-                  count(distinct call_id) as received,
+                  sum(CASE verb When 'ENTERQUEUE' Then 1 else 0 End) as received,
                   count(if(verb='abandon',1,NULL)) as abandon, 
                   count(if(verb='connect',1,NULL)) as answered,
                   Ceiling(count(if(verb='connect',1,NULL))*100/count(distinct call_id)) as answeravg,
@@ -929,7 +931,7 @@ class ReportsRepository {
         $groupby = "Group by day";
 
         $query = "select Dayname(created) AS day, 
-                  count(distinct call_id) as received,
+                  sum(CASE verb When 'ENTERQUEUE' Then 1 else 0 End) as received,
                   count(if(verb='abandon',1,NULL)) as abandon, 
                   count(if(verb='connect',1,NULL)) as answered,
                   Ceiling(count(if(verb='connect',1,NULL))*100/count(distinct call_id)) as answeravg,
