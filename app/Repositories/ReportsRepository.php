@@ -141,7 +141,7 @@ class ReportsRepository {
         $channel = "TRIM(REPLACE(SUBSTRING(channel,1,LOCATE(\"-\",channel,LENGTH(channel)-8)-1),\"SIP/\",\"\"))";
         $userExtention = implode(',',Auth::User()->Extension()->Pluck("extension_no")->ToArray()).", ".Auth::User()->did_no;
 
-        $where = "((src in ($userExtention) AND Length(dst)>4) OR dst in ($userExtention) )";
+        $where = "((src in ($userExtention) AND Length(dst)>4) OR dst in ($userExtention))";
 
 
 
@@ -158,9 +158,20 @@ class ReportsRepository {
                               sum(case when billsec=0 then 1 else 0 end) as Missed, sum(billsec) as Duration"))
             ->whereRaw($where)
             ->groupby(DB::raw("DATE_FORMAT(calldate, '%Y-%m-%d %H:00')"))->Get();
+//        echo "Select DATE_FORMAT(calldate, '%Y-%m-%d %H:00') Createdhour,
+//                              count(*) as Total,
+//                              IFNULL(sum(case when dst in ($userExtention) then 1 end),0) as Inbound,
+//                              IFNULL(sum(case when src in ($userExtention) AND Length(dst)>4 then 1 end),0) as Outbound,
+//                              sum(case when billsec>0 then 1 else 0 end) as Completed,
+//                              sum(case when billsec=0 then 1 else 0 end) as Missed, sum(billsec) as Duration
+//                              from cdr where ". $where;
+
         $json['Hrs'] = $Result;
 
-        $query = "select DATE_FORMAT(created, '%Y-%m-%d %H:00') as Createdhour, count(*) as Inbound from queue_log where verb in ('ENTERQUEUE') and created between '".$start." 00:00:00' and '".$end." 23:59:59' group by DATE_FORMAT(created, '%Y-%m-%d %H:00')";
+        $query = "select DATE_FORMAT(created, '%Y-%m-%d %H:00') as Createdhour, count(*) as Inbound 
+                  from queue_log where verb in ('ENTERQUEUE') 
+                  and created between '".$start." 00:00:00' and '".$end." 23:59:59' 
+                  group by DATE_FORMAT(created, '%Y-%m-%d %H:00')";
         $Result = DB::connection('mysql2')->select($query);
         $json['HrsIB'] = $Result;
 

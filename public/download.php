@@ -28,5 +28,7 @@ if (file_exists($file)) {
 }
 
 else {
-echo "file not found";
+    echo "file not found";
+
+echo "<a href='" . $_SERVER["HTTP_REFERER"] . "'> Back </a>";
 }
