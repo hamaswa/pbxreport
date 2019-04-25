@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Cms;
 
+use App\DataTables\realTimeReportDataTable;
+use App\DataTables\realTimeReportSummaryDataTable;
 use App\Repositories\ReportsRepository;
 use App\Http\Controllers\AppBaseController;
 use Flash;
 use Auth;
 use App\Models\Pbx_cdr;
-use App\Models\Realtime;
 use Illuminate\Http\Request;
 
 class ReportsController extends AppBaseController
@@ -54,18 +55,22 @@ class ReportsController extends AppBaseController
 		return view('cms.reports.ouserreport', array('oReport' => $oReport, 'oReportDetail' => $oReportDetail));
 	}
 	
-	public function showRealTimeReport(Request $request)
+	public function showRealTime(realTimeReportDataTable $dataTable)
 	{
-		return view('cms.reports.realtime');
+		return $dataTable->render('cms.reports.realtime');
 	}
-	
-	public function realTimeReport(Request $request)
-	{
-		$userExtensions = Auth::User()->Extension()->Pluck("extension_no")->ToArray();
-		$userExtensions[] = Auth::User()->did_no;
-		$info_Realtime = Realtime::WhereIn('extension', $userExtensions)->Get();
-		return response()->json($info_Realtime);
-	}
+
+    public function realTime(Request $request)
+    {
+
+        $data = $this->reportRepository->realTimeReport($request);
+        return response()->json($data);
+    }
+
+    public function realTimeReport($interface,realTimeReportSummaryDataTable $dataTable)
+    {
+        return $dataTable->with('interface',$interface)->render("cms.reports.realtimereport");
+    }
 	
 	public function showQueueStatsReport(Request $request)
 	{
@@ -95,7 +100,11 @@ class ReportsController extends AppBaseController
                 '22:00-22:30'=>'22:00-22:30','22:30-23:00'=>'22:30-23:00','23:00-23:30'=>'23:00-23:30','23:30-24:00'=>'23:30-00:00'];
 
         $queue = array('options'=>$this->getQueue(),'selected'=>$request['queue']);
-        return view('cms.reports.queuereport',array('hour'=>$hour,'year'=>array("2018"=>'2018',"2019"=>'2019',),'queue' => $queue));
+        $thisyear = Date("Y");
+        for($i=0;$i<=10;$i++) {
+            $year[$thisyear-$i] = $thisyear-$i;
+        }
+            return view('cms.reports.queuereport',array('hour'=>$hour,'year'=>$year,'queue' => $queue));
     }
 
 

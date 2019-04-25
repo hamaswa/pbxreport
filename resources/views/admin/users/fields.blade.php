@@ -1,13 +1,13 @@
 <!-- Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('name', 'Name:') !!}
-    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+    {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('email', 'Emal:') !!}
-    {!! Form::text('email', null, ['class' => 'form-control']) !!}
+    {!! Form::text('email', null, ['class' => 'form-control','required']) !!}
 </div>
 
 <!-- Name Field -->
@@ -25,18 +25,22 @@
 <!-- Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('did_no', 'DID No:') !!}
-    {!! Form::text('did_no', null, ['class' => 'form-control']) !!}
+    {!! Form::text('did_no', null, ['class' => 'form-control','required']) !!}
 </div>
 
 <!-- Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('mobile', 'Mobile:') !!}
-    {!! Form::text('mobile', null, ['class' => 'form-control']) !!}
+    {!! Form::text('mobile', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group col-sm-6">
     {!! Form::label('extension', 'Extension:') !!}
-    {!! Form::select('extension', $data['data'], null, array('class'=>'form-control','multiple' => 'multiple','name'=>'extension[]')); !!}
+    @if(count($data)==0)
+    <span class="warning">No Extension Available to Assign</span>
+    @else
+    {!! Form::select('extension', $data['data'], null, array('class'=>'form-control','required','multiple' => 'multiple','name'=>'extension[]')); !!}
+    @endif
 
 </div>
 

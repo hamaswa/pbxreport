@@ -178,7 +178,14 @@ class ReportsRepository {
         //OB stats
         $where = "(src in ($userExtention) AND Length(dst)>4 )";
         $where = $where." and calldate between '".$start."' and '".$end."'";
-        $Result = DB::connection('mysql3')->table('cdr')->select(DB::raw("count(*) as Total, IFNULL(sum(case when dst in ($userExtention) then 1 end),0) as Inbound, IFNULL(sum(case when src in ($userExtention) then 1 end),0) as Outbound, sum(case when billsec>0 then 1 else 0 end) as Completed, sum(case when billsec=0 then 1 else 0 end) as Missed, sum(billsec) as Duration, sum(billsec) as Billing"))
+        $sql = "count(*) as Total, 
+                IFNULL(sum(case when dst in ($userExtention) then 1 end),0) as Inbound, 
+                IFNULL(sum(case when src in ($userExtention) then 1 end),0) as Outbound, 
+                sum(case when billsec>0 then 1 else 0 end) as Completed, 
+                sum(case when billsec=0 then 1 else 0 end) as Missed, 
+                sum(billsec) as Duration, sum(billsec) as Billing";
+
+        $Result = DB::connection('mysql3')->table('cdr')->select(DB::raw($sql))
             ->whereRaw($where)->Get();
         $json['OBTotalTime'] = 0;
         $json['OBAnswer'] = 0;
@@ -706,6 +713,29 @@ class ReportsRepository {
 
 
         }
+
+
+    }
+
+    public function realTimeReport($request){
+        $userExtensions = Auth::User()->Extension()->Pluck("extension_no")->ToArray();
+        $userExtensions[] = Auth::User()->did_no;
+
+        $sql = "Select * from agentlogin 
+        where interface in ('" . implode("','",$userExtensions) . "') 
+        and event='QueueMemberAdded'
+        and  logout_time is NULL";
+        return DB::connection('mysql')->select($sql);
+    }
+
+    public function agentsReport($data){
+        $userExtensions = Auth::User()->Extension()->Pluck("extension_no")->ToArray();
+        $userExtensions[] = Auth::User()->did_no;
+        $sql = "select *, timediff(logout_time,login_time) as logintime from agentlogin 
+                where interface in ('" . implode("','",$userExtensions) . "') 
+                and event='queuememberadded'";
+        return DB::connection('mysql')->select($sql);
+
 
 
     }

@@ -15,7 +15,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4",
         "orchestra/parser": "~3.0",
-        "spatie/laravel-permission": "^2.36",
+        "spatie/laravel-permission": "^1.18.0",
         "yajra/laravel-datatables-buttons": "^2.0",
         "yajra/laravel-datatables-oracle": "^7.10"
     },

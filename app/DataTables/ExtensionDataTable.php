@@ -29,6 +29,7 @@ class ExtensionDataTable extends DataTable
      */
 	public function query()
     {
+
         $query = Extension::query();
         return $this->applyScopes($query);
     }

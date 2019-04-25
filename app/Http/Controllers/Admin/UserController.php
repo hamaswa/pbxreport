@@ -72,12 +72,13 @@ class UserController extends AppBaseController
 
         $this->temp_ext = array();
         $where = "user not in ($ext)";
-        if($ext!=0)
-        $data = DB::connection('mysql4')->table('devices')->select(DB::raw('id,description'))->whereRaw($where);
-        else
+        //if($ext!=0)
+        //$data = DB::connection('mysql4')->table('devices')->select(DB::raw('id,description'))->whereRaw($where)->get()->toArray();
+        //else
         $data = DB::connection('mysql4')->table('devices')->select(DB::raw('id,description'))->get()->toArray();
 
         $data = json_decode(json_encode($data), true);
+
         foreach ($data as $item) {
             $this->temp_ext[$item['id']]=$item['description'];
         }
@@ -101,7 +102,7 @@ class UserController extends AppBaseController
 
 		$user = new User();
         $user_id = $user->insertGetId([
-            'name'=>$input['name'],'created_at'=>date('Y-m-d h:m:s'),'email'=>$input['email'],'mobile'=>$input['mobile'],'password'=>$input['password'],'did_no'=>$input['did_no'],'status'=>$input['status']]);
+            'name'=>$input['name'],'created_at'=>date('Y-m-d h:i:s'),'email'=>$input['email'],'mobile'=>$input['mobile'],'password'=>$input['password'],'did_no'=>$input['did_no'],'status'=>$input['status']]);
 
         foreach ($input['extension'] as $ext) {
             $extension->create(['user_id' => $user_id, 'extension_no' => $ext]);
@@ -171,10 +172,9 @@ class UserController extends AppBaseController
         $user->status = $input['status'];
         $user->Extension()->delete();
         foreach ($input['extension'] as $ext) {
-            $user->Extension()->create(['extension_no'=>$ext]);
+            $user->Extension()->create(['extension_no'=> $ext]);
         }
         $user->update();
-
         return redirect(route('nusers.index'));
     }
 

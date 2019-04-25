@@ -47,7 +47,7 @@
                   <div class="col-sm-2 form-group">
                       <label>Select Year</label>
 
-                      {!! Form::select('year',$year,null,['id'=>'year','class'=>'form-control']) !!}
+                      {!! Form::select('year',$year,Date('Y'),['id'=>'year','class'=>'form-control']) !!}
 
 
                   </div>

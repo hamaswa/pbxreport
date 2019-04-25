@@ -202,9 +202,9 @@
             <table class="table table-hover" width="100%">
                <tbody>
                   <tr>
-                    <th style="width:10%">Extension</th>
+                    <th style="width:10%">Agent</th>
                     <th style="width:10%">Status</th>
-                    <th style="width:10%">Information</th>
+                    <th style="width:10%">Online Time</th>
                   </tr>
                <tbody id="realBody">
                </tbody>
@@ -292,33 +292,7 @@
 @push('scripts')
 
 <script type="text/javascript">		
-	/*$(document).on('click', '.stats[data-type]', function (e) { 
-		var url = "{{ url('/cms/dstats/') }}/"+$(this).data('type');
-		$.ajax({
-			url: url,
-			type: 'GET',
-			dataType: 'json',
-			data: {method: '_POST', "_token": "{{ csrf_token() }}", submit: true},
-			success: function(data) {
-				for (var i=0;i<data.length;++i)
-				{
-					$('#totalcalls').html(data[i].Total);
-					$('#ob').html(data[i].Outbound);
-					$('#ib').html(data[i].Inbound);
-					$('#duration').html(data[i].Duration);
-					$('#answer').html(data[i].Completed);
-					$('#missed').html(data[i].Missed);
-					$('#billing').html(data[i].Billing);
-					$('#cost').html(data[i].Cost);
-				}
-			},
-			error: function (result, status, err) {
-				//alert(result.responseText);
-				//alert(status.responseText);
-				//alert(err.Message);
-			}
-		});
-	});*/
+
 	setInterval("getRealTime()",1000);
 	function getRealTime()
 	{
@@ -372,16 +346,64 @@
 			dataType: 'json',
 			data: {method: '_GET', "_token": "{{ csrf_token() }}" , submit: true},
 			success: function (response) {
-				$("#realBody").html("");
-				$.each(response,function(key,value){
-					var info="";
-					if(value.info!="s")
-					{
-						info = value.info;
-					}
-					$("#realBody").append('<tr><td>'+value.extension+'</td><td>'+value.ext_status_text+'</td><td>'+info+'</td><tr>');
-				});
-			},
+                if(response.length>0) {
+                    $("#realBody").html("");
+                } else {
+                    $("#realBody").html("<tr><td colspan='4'><b>No Agent Login</b></td></tr>");
+                }
+
+                $.each(response, function (key, value) {
+                    timeOnline = updateClock(value.login_time)
+                    status = value.status;
+                    color = '#ffffaa'
+                    switch (value.status){
+                        case '0':
+                            status = "Unknown";
+                            color ='#ffcf00';
+                            break;
+                        case '2':
+                            status = "Online";
+                            color ='#00ff00';
+                            break;
+                        case '4':
+                            status = "Invalid";
+                            color ='#ff4400';
+                            break;
+                        case '6':
+                            status = "Ringing";
+                            color ='#004ff0';
+                            break;
+                        case '8':
+                            status = "OnHold";
+                            color ='#aaffff';
+                            break;
+                    }
+
+                    $("#realBody").append($('<tr><td>' + value.interface + '</td><td><span style="background-color:'+color+'">' + status + '</span></td><td now="' + response.currenttime + '"  start="' + value.login_time + '" id=' + value.id + ' class="time-elasped">' + timeOnline + '</td><tr>'));
+                });
+
+                function updateClock(startDateTime, nowTime) {
+                    var startDateTime = new Date(startDateTime); // YYYY (M-1) D H m s (start time and date from DB)
+                    var startStamp = startDateTime.getTime();
+
+                    var estTime = new Date();
+                    var nowTime = new Date(estTime.toLocaleString('en-US', {timeZone: 'Asia/Singapore'}));
+                    var nowStamp = nowTime.getTime();
+
+                    var diff = Math.round((nowStamp - startStamp) / 1000);
+
+                    var d = Math.floor(diff / (24 * 60 * 60));
+                    diff = diff - (d * 24 * 60 * 60);
+                    var h = Math.floor(diff / (60 * 60));
+                    diff = diff - (h * 60 * 60);
+                    var m = Math.floor(diff / (60));
+                    diff = diff - (m * 60);
+                    var s = diff;
+
+                    return   h + ":" + m + ":" + s;
+
+                }
+            },
 			error: function (result, status, err) {
 				///alert(result.responseText);
 				///alert(status.responseText);
@@ -389,74 +411,9 @@
 			},
 		});
 	}
+
 	
-	var url = "{{ url('/cms/dstats/') }}"
-	$.ajax({
-		url: url,
-		type: 'GET',
-		dataType: 'json',
-		data: {method: '_POST', "_token": "{{ csrf_token() }}", submit: true},
-		success: function(data) {
-			$('#TotalCalls').html(data.TotalCalls);
-			$('#Received').html(data.Received);
-			$('#Abandoned').html(data.Abandoned);
-			$('#Answered').html(data.Answered);
-			$('#WaitTime').html(data.WaitTime);
-			$('#TalkTime').html(data.TalkTime);
-			$('#TotalTime').html(data.TotalTime);
-			$('#AbandonRate').html(data.AbandonRate+'%');
-			$('#AnswerRate').html(data.AnswerRate+'%');
-			$('#Holdtime').html(data.Holdtime);
-			$('#OBTotalTime').html(data.OBTotalTime);
-			$('#OBAnswer').html(data.OBAnswer);
-			$('#OBUnanswer').html(data.OBUnanswer);
-			$('#OBDuration').html(data.OBDuration);
-			$('#OBAVGDuration').html(data.OBAVGDuration);
-			$('#Waiting').html(data.Waiting);
-			$("#hourlyBody").html("");
-			var index=0;
-			$.each(data.Hrs,function(key1,value1){
-				$.each(data.HrsIB,function(key2,value2){
-					if(value2.Createdhour==value1.Createdhour)
-					{
-						$("#hourlyBody").append('<tr><td>'+value1.Createdhour+'</td><td>'+(parseInt(value2.Inbound)+parseInt(value1.Outbound))+'</td><td>'+value2.Inbound+'</td><td>'+value1.Outbound+'</td><tr>');
-					}
-				});
-				
-				index=index+1;
-			});
-			
-		},
-		error: function (result, status, err) {
-			//alert(result.responseText);
-			//alert(status.responseText);
-			//alert(err.Message);
-		}
-	});
-	
-	var url = "{{ url('/cms/realtime/stats') }}"
-	$.ajax({
-		url: url,
-		type: 'GET',
-		dataType: 'json',
-		data: {method: '_GET', "_token": "{{ csrf_token() }}" , submit: true},
-		success: function (response) {
-			$("#realBody").html("");
-			$.each(response,function(key,value){
-				var info="";
-				if(value.info!="s")
-				{
-					info = value.info;
-				}
-				$("#realBody").append('<tr><td>'+value.extension+'</td><td>'+value.ext_status_text+'</td><td>'+info+'</td><tr>');
-			});
-		},
-		error: function (result, status, err) {
-			///alert(result.responseText);
-			///alert(status.responseText);
-			///alert(err.Message);
-		},
-	});
+
 </script>
 
 @endpush

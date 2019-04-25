@@ -26,9 +26,10 @@ Route::group(['prefix' => 'cms', 'middleware' => 'auth'], function() {
 	Route::get('/ouserreport', 'Cms\ReportsController@oUserReport');
 	
 	Route::get('/billreport', 'Cms\ReportsController@billReport');
-	
-	Route::get('/realtime', 'Cms\ReportsController@showRealTimeReport');
-	Route::get('/realtime/stats', 'Cms\ReportsController@realTimeReport');
+
+    Route::get('/realtime', 'Cms\ReportsController@showRealTime');
+    Route::get('/realtimereport/{interface}', 'Cms\ReportsController@realTimeReport')->name("realtimereport");
+	Route::get('/realtime/stats', 'Cms\ReportsController@realTime');
 
     Route::get('/queuestats', 'Cms\ReportsController@showQueueStatsReport');
 
